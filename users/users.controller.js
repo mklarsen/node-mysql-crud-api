@@ -6,7 +6,6 @@ const Role = require('_helpers/role');
 const userService = require('./user.service');
 
 // routes
-
 router.get('/', getAll);
 router.get('/:id', getById);
 router.post('/', createSchema, create);
@@ -57,7 +56,14 @@ function createSchema(req, res, next) {
         role: Joi.string().valid(Role.Admin, Role.Manager, Role.User).required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(6).required(),
-        confirmPassword: Joi.string().valid(Joi.ref('password')).required()
+        confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
+        domhand: Joi.string().min(4).required(),
+        address1: Joi.string().required(),
+        address2: Joi.string(),
+        postno: Joi.string().min(4).required(),
+        city: Joi.string().required(),
+        corpname: Joi.string(),
+        taxid: Joi.string(),
     });
     validateRequest(req, next, schema);
 }
@@ -70,7 +76,14 @@ function updateSchema(req, res, next) {
         role: Joi.string().valid(Role.Admin, Role.Manager, Role.User).empty(''),
         email: Joi.string().email().empty(''),
         password: Joi.string().min(6).empty(''),
-        confirmPassword: Joi.string().valid(Joi.ref('password')).empty('')
+        confirmPassword: Joi.string().valid(Joi.ref('password')).empty(''),
+        domhand: Joi.string().min(4).required(),
+        address1: Joi.string().required(),
+        address2: Joi.string(),
+        postno: Joi.string().min(4).required(),
+        city: Joi.string().required(),
+        corpname: Joi.string(),
+        taxid: Joi.string(),
     }).with('password', 'confirmPassword');
     validateRequest(req, next, schema);
 }

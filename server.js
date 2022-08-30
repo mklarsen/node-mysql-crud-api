@@ -10,6 +10,9 @@ app.use(cors());
 
 // api routes
 app.use('/users', require('./users/users.controller'));
+app.use('/domains', require('./domain/domains.controller'));
+app.use('/domainentries', require('./domain/domain_entries.controller'));
+
 
 // global error handler
 app.use(errorHandler);

@@ -24,7 +24,7 @@ async function create(params) {
     }
 
     const user = new db.User(params);
-    
+
     // hash password
     user.passwordHash = await bcrypt.hash(params.password, 10);
 
@@ -56,8 +56,8 @@ async function _delete(id) {
     await user.destroy();
 }
 
-// helper functions
 
+// helper functions
 async function getUser(id) {
     const user = await db.User.findByPk(id);
     if (!user) throw 'User not found';
